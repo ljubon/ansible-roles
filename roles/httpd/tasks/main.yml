@@ -1,0 +1,15 @@
+- name: Install Apache 
+  yum: name={{ item }} state=present
+  with_items:
+    - httpd
+    - httpd-devel
+
+#- name: Change Apache's default port
+#  lineinfile:
+#    dest: '{{ httpd_conf_location  }}'
+#    regexp: '^Listen '
+#    insertafter: '^#Listen '
+#    line: 'Listen 8080'
+    
+- name: Verify that Apache is started and configure it to run at boot
+  service: name=httpd state=started enabled=yes

@@ -1,0 +1,21 @@
+ - name: Add developer user
+   user:
+     name: "{{ users.dev.user }}"
+     state: present
+     system: yes
+     password: "{{ users.dev.password }}"
+     generate_ssh_key: yes
+     ssh_key_bits: 2048
+     ssh_key_file: .ssh/id_rsa
+     ssh_key_passphrase: "{{ users.dev.passphrase }}"
+
+ - name: Add QA user
+   user:
+     name: "{{ users.qa.user }}"
+     state: present
+     system: yes
+     password: "{{ users.qa.password }}"
+     generate_ssh_key: yes
+     ssh_key_bits: 2048
+     ssh_key_file: .ssh/id_rsa
+     ssh_key_passphrase: "{{ users.qa.passphrase }}"

@@ -1,0 +1,35 @@
+---
+- name: Install Nagios
+  yum: name="{{ item }}" state=present
+  with_items:
+    - nagios
+
+- name: Enable Nagios
+  service: name=nagios enabled=yes state=started
+
+- name: Apply nagios.conf to remote server
+  template:
+    src: templates/nagios.conf
+    dest: /etc/httpd/conf.d/
+    owner: root
+    group: root
+    mode: 0644
+
+- lineinfile:
+    path: /etc/nagios/passwd
+    regexp: '^nagiosadmin:'
+    insertafter: '^#nagiosadmin:'
+    line: 'nagiosadmin:{{users.nagios.adminpass}}'
+
+- name: Create Nagios group
+  group:
+    name: nagios
+    state: present
+
+- name: Add user to Nagios group
+  user:
+    group: nagios
+    name: "{{ users.nagios.user  }}"
+    password: "{{ users.nagios.password }}"
+    update_password: always
+

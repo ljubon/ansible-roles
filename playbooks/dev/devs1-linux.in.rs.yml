@@ -1,0 +1,12 @@
+- hosts: all
+  roles:
+    - roles/common
+#    - roles/users
+    - roles/httpd
+    - roles/nagios
+#    - role: geerlingguy.java
+#      when: "ansible_os_family == 'RedHat'"
+#      java_packages:
+#        - java-1.8.0-openjdk
+#    - role: geerlingguy.docker
+

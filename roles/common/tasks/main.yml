@@ -1,0 +1,24 @@
+---
+- name: Install EPEL repository
+  yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm state=latest
+
+- name: Import EPEL GPG key
+  rpm_key: key=/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }} state=present
+
+- name: Disable firewalld on the server
+  systemd: name=firewalld enabled=no state=stopped
+
+- name: Install htop - linux process monitoring app
+  yum: name=htop state=present
+
+- name: Install nano - text editor
+  yum: name=nano state=latest
+
+- name: Install vim - text editor
+  yum: name=vim state=latest
+
+- name: Install mc - Midnight Commander File Manager (visual file manager)
+  yum: name=mc state=latest
+
+- name: Install tree - Graph view of directories and files
+  yum: name=tree state=latest

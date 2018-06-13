@@ -1,0 +1,6 @@
+[devs1-linux.in.rs]
+192.168.20.13
+192.168.20.4
+
+[dev:children]
+devs1-linux.in.rs
